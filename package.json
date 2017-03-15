@@ -1,0 +1,22 @@
+{
+  "name": "koa-upload",
+  "version": "0.0.0",
+  "scripts": {
+    "start": "ts-node index.ts"
+  },
+  "author": "Morlay <morlay@qq.com>",
+  "license": "WTFPL",
+  "dependencies": {
+    "@types/koa": "2.x",
+    "@types/node": "7.0.8",
+    "async-busboy": "0.3.4",
+    "koa": "2.x",
+    "koa-cors": "0.0.16",
+    "koa-logger": "2.x",
+    "koa-static": "3.x"
+  },
+  "devDependencies": {
+    "ts-node": "2.1.0",
+    "typescript": "2.2.1"
+  }
+}
