@@ -11,12 +11,51 @@
 </head>
 <body>
 <h1>File Upload</h1>
-<p>Try uploading multiple files at a time.</p>
+<p>Try uploading file</p>
 
-<form action="/" method="post" enctype="multipart/form-data">
-    <input type="file" name="file" multiple>
-    <input type="submit" value="Upload">
+<form action="/files"
+      method="post"
+      enctype="multipart/form-data">
+    <input type="file"
+           name="file">
+    <input type="submit"
+           value="Upload">
 </form>
+<ul id="files">
+</ul>
+<script>
+    function appendFile(file) {
+        const $files =  document
+            .getElementById("files")
 
+        const $li = document.createElement("li");
+        $li.innerText = file.name;
+        $li.addEventListener("click", () => {
+            const callDelete = prompt("确认删除", "OK");
+            if (callDelete) {
+                deleteFileByName(file.name)
+                    .then(() => {
+                        $li.remove()
+                    })
+            }
+        });
+
+        $files
+            .appendChild($li)
+    }
+
+    function loadFiles() {
+        return fetch("/files")
+            .then((res) => res.json())
+    }
+
+    function deleteFileByName(name) {
+        return fetch(`/files/${name}`, { method: "DELETE"})
+    }
+
+    loadFiles()
+        .then((data) => data.files.forEach(appendFile))
+
+</script>
 </body>
 </html>
